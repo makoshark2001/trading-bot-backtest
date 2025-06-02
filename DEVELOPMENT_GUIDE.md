@@ -1,491 +1,738 @@
-# trading-bot-backtest - Development Guide
+# trading-bot-backtest - Updated Development Guide
 
 **Repository**: https://github.com/makoshark2001/trading-bot-backtest  
 **Port**: 3002  
-**Priority**: 3 (Depends on trading-bot-core + trading-bot-ml)
+**Status**: 🎉 **85% Complete - Production Ready Core**  
+**Priority**: Enhancement & Advanced Features
 
 ## 🎯 Service Purpose
 
 Historical strategy testing and validation service providing comprehensive backtesting capabilities, performance analytics, and risk management validation. Integrates with both core technical analysis and ML predictions.
 
+**Current Status**: Core backtesting engine is **fully functional and production-ready**. Focus is now on enhancing analytics depth and adding advanced features.
+
 ## 💬 Chat Instructions for Claude
 
 ```
-I'm building the backtesting service that tests trading strategies using historical data. This service integrates with both trading-bot-core (technical analysis) and trading-bot-ml (predictions) to validate strategy performance.
+I have a fully functional backtesting service that tests trading strategies using historical data. The core engine is complete and production-ready, integrating with both trading-bot-core (technical analysis) and trading-bot-ml (predictions).
 
-Key requirements:
-- Historical strategy testing with realistic simulation
-- Performance metrics (Sharpe ratio, drawdown, etc.)
-- Integration with core service (port 3000) and ML service (port 3001)
-- RESTful API on port 3002
-- Advanced analytics and reporting
-- Support for both technical-only and ML-enhanced strategies
+Current capabilities:
+✅ Complete backtesting engine with realistic simulation
+✅ Full REST API on port 3002
+✅ Integration with core service (port 3000) and ML service (port 3001)
+✅ Basic performance metrics (Sharpe ratio, drawdown, win rate, etc.)
+✅ Portfolio management and trade tracking
+✅ Signal integration (technical + ML)
 
-The core and ML services are already running. I need to build a comprehensive backtesting engine.
+I need to enhance the service with:
+- Advanced performance metrics (Sortino, Calmar, VaR)
+- Comprehensive testing suite
+- Monte Carlo simulation
+- Walk-forward analysis
+- Advanced risk analytics
+
+The core functionality is solid - we're now adding sophisticated features.
 ```
 
-## 📋 Implementation To-Do List
+## 📊 Current Implementation Status
 
-### ✅ Phase 3A: Project Setup & Service Integration
+### ✅ **COMPLETED - Production Ready**
 
-- [ ] **Project Infrastructure**
-  - [ ] Initialize Node.js project: `npm init -y`
-  - [ ] Install dependencies:
-    ```bash
-    npm install express axios lodash winston cors dotenv moment
-    npm install --save-dev jest nodemon
-    ```
-  - [ ] Create folder structure:
+#### **Phase 3A: Project Setup & Service Integration** ✅ **COMPLETE**
+- ✅ **Project Infrastructure**
+  - ✅ Node.js project with complete package.json
+  - ✅ All dependencies installed (express, axios, lodash, winston, moment, dotenv)
+  - ✅ Professional folder structure:
     ```
     src/
-    ├── server/
-    ├── backtest/
-    ├── analytics/
-    ├── services/
-    ├── routes/
-    └── utils/
-    config/
-    logs/
-    tests/
+    ├── api/BacktestServer.js        ✅ Complete REST API server
+    ├── backtesting/BacktestEngine.js ✅ Full backtesting engine
+    ├── data/ServiceClient.js        ✅ Service integration
+    ├── utils/Logger.js              ✅ Winston logging
+    ├── utils/index.js               ✅ Utility exports
+    └── main.js                      ✅ Entry point
+    scripts/
+    ├── run-backtest.js              ✅ Comprehensive backtest runner
+    └── test-backtest.js             ✅ Integration tests
     ```
 
-- [ ] **Service Integration**
-  - [ ] File: `src/services/ServiceClient.js` - Integration with core + ML services
-  - [ ] Health monitoring for both dependent services
-  - [ ] Fallback mechanisms when services unavailable
-  - [ ] Test connectivity with core (3000) and ML (3001)
+- ✅ **Service Integration**
+  - ✅ `ServiceClient.js` - Complete integration with core + ML services
+  - ✅ Health monitoring for both dependent services
+  - ✅ Fallback mechanisms when ML service unavailable
+  - ✅ Tested connectivity with core (3000) and ML (3001)
 
-### ✅ Phase 3B: Backtesting Engine Core
+#### **Phase 3B: Backtesting Engine Core** ✅ **COMPLETE**
+- ✅ **Portfolio Management** (`BacktestEngine.js`)
+  - ✅ Complete portfolio state tracking
+  - ✅ Position management (long/short, entry/exit)
+  - ✅ Cash management and balance tracking
+  - ✅ Realized and unrealized P&L calculation
+  - ✅ Trade history and equity curve generation
 
-- [ ] **Portfolio Management**
-  - [ ] File: `src/backtest/PortfolioManager.js` - Portfolio state tracking
-  - [ ] Position tracking (long/short, entry/exit)
-  - [ ] Cash management and balance tracking
-  - [ ] P&L calculation (realized and unrealized)
-  - [ ] Trade history and equity curve generation
+- ✅ **Trading Simulation**
+  - ✅ Trade execution simulation with commissions
+  - ✅ Slippage modeling for realistic results
+  - ✅ Risk-based position sizing
+  - ✅ Stop-loss and take-profit implementation
+  - ✅ Market order simulation with realistic costs
 
-- [ ] **Trading Simulation**
-  - [ ] File: `src/backtest/BacktestEngine.js` - Main backtesting engine
-  - [ ] Trade execution simulation with commissions
-  - [ ] Slippage modeling for realistic results
-  - [ ] Position sizing with risk management
-  - [ ] Stop-loss and take-profit implementation
-  - [ ] Order types (market, limit, stop)
+- ✅ **Signal Integration**
+  - ✅ Technical signal processing from core service
+  - ✅ ML signal integration from ML service
+  - ✅ Signal confidence weighting
+  - ✅ Ensemble decision making (technical + ML)
+  - ✅ Configurable signal thresholds
 
-- [ ] **Signal Integration**
-  - [ ] File: `src/backtest/SignalProcessor.js` - Signal combination logic
-  - [ ] Technical signal processing from core service
-  - [ ] ML signal integration from ML service
-  - [ ] Signal confidence weighting
-  - [ ] Ensemble decision making (technical + ML)
+#### **Phase 3C: Performance Analytics Engine** ✅ **COMPLETE**
+- ✅ **Core Metrics Calculation**
+  - ✅ Return metrics (total, percentage, annualized)
+  - ✅ Risk-adjusted returns (Sharpe ratio)
+  - ✅ Risk metrics (maximum drawdown, volatility)
+  - ✅ Trade analysis (win rate, profit factor)
+  - ✅ Trade statistics (avg win/loss, largest trades)
+  - ✅ Expectancy calculations
 
-### ✅ Phase 3C: Performance Analytics Engine
+- ✅ **Analytics Implementation**
+  - ✅ Standard deviation calculations
+  - ✅ Performance attribution tracking
+  - ✅ Comprehensive results object
+  - ✅ Trade frequency and duration analysis
 
-- [ ] **Core Metrics Calculation**
-  - [ ] File: `src/analytics/PerformanceAnalyzer.js` - Main analytics engine
-  - [ ] **Return Metrics**:
-    - Total return, annualized return
-    - Risk-adjusted returns (Sharpe, Sortino, Calmar ratios)
-  - [ ] **Risk Metrics**:
-    - Maximum drawdown, average drawdown
-    - Volatility (daily, weekly, monthly)
-    - Value at Risk (VaR), Expected Shortfall
-  - [ ] **Trade Analysis**:
-    - Win rate, profit factor
-    - Average win/loss, largest win/loss
-    - Trade frequency and duration analysis
+#### **Phase 3D: Backtesting API** ✅ **COMPLETE**
+- ✅ **API Routes** (in `BacktestServer.js`)
+  - ✅ `GET /api/health` - Service + dependencies status
+  - ✅ `POST /api/backtest/:pair` - Single pair backtest
+  - ✅ `POST /api/backtest/all` - All pairs backtest
+  - ✅ `GET /api/pairs` - Available pairs for backtesting
 
-- [ ] **Advanced Analytics**
-  - [ ] File: `src/analytics/AdvancedAnalytics.js` - Advanced calculations
-  - [ ] Rolling performance windows
-  - [ ] Correlation analysis with benchmarks
-  - [ ] Performance attribution (technical vs ML)
-  - [ ] Risk-adjusted performance metrics
-  - [ ] Monthly/quarterly performance breakdown
+- ✅ **Server Implementation**
+  - ✅ Express server on port 3002
+  - ✅ Request validation and error handling
+  - ✅ Async backtest handling for long operations
+  - ✅ Comprehensive error handling and timeout management
+  - ✅ CORS support for development
 
-### ✅ Phase 3D: Backtesting API
+### 🔶 **ENHANCEMENT PHASE - Current Focus**
 
-- [ ] **API Routes** (Create in `src/routes/`)
-  - [ ] `health.js` - GET /api/health (service + dependencies status)
-  - [ ] `backtest.js` - POST /api/backtest/:pair (single pair backtest)
-  - [ ] `backtest.js` - POST /api/backtest/all (all pairs backtest)  
-  - [ ] `pairs.js` - GET /api/pairs (available pairs for backtesting)
+#### **Phase 3E: Advanced Features & Enhancements** 🔶 **IN PROGRESS**
 
-- [ ] **Server Setup**
-  - [ ] File: `src/server/app.js` - Express server on port 3002
-  - [ ] Request validation and sanitization
-  - [ ] Async backtest handling (long-running operations)
-  - [ ] Progress tracking for batch backtests
-  - [ ] Error handling and timeout management
+## 📋 Enhancement To-Do List
 
-### ✅ Phase 3E: Advanced Features & Testing
+### 🎯 **HIGH PRIORITY - Week 1-2**
 
-- [ ] **Advanced Backtesting Features**
-  - [ ] File: `src/backtest/AdvancedBacktest.js` - Enhanced capabilities
-  - [ ] Monte Carlo simulation for robustness testing
-  - [ ] Walk-forward analysis for out-of-sample validation
-  - [ ] Parameter optimization (grid search)
-  - [ ] Strategy comparison and ranking
+#### **Enhanced Performance Metrics**
+- [ ] **File: `src/analytics/AdvancedMetrics.js`** - Create advanced calculations
+  - [ ] **Sortino Ratio**: Downside risk-adjusted return
+    ```javascript
+    calculateSortinoRatio(returns, targetReturn = 0) {
+      const downside = returns.filter(r => r < targetReturn);
+      const downsideStd = this.calculateStandardDeviation(downside);
+      const avgReturn = this.calculateMean(returns);
+      return downsideStd > 0 ? (avgReturn - targetReturn) / downsideStd : 0;
+    }
+    ```
+  
+  - [ ] **Calmar Ratio**: Annual return / Maximum drawdown
+    ```javascript
+    calculateCalmarRatio(annualReturn, maxDrawdown) {
+      return maxDrawdown > 0 ? annualReturn / maxDrawdown : 0;
+    }
+    ```
+  
+  - [ ] **Value at Risk (VaR)**: 95% and 99% confidence levels
+    ```javascript
+    calculateVaR(returns, confidence = 0.95) {
+      const sorted = returns.sort((a, b) => a - b);
+      const index = Math.floor((1 - confidence) * sorted.length);
+      return sorted[index];
+    }
+    ```
+  
+  - [ ] **Expected Shortfall (CVaR)**: Conditional Value at Risk
+    ```javascript
+    calculateExpectedShortfall(returns, confidence = 0.95) {
+      const var = this.calculateVaR(returns, confidence);
+      const tailLosses = returns.filter(r => r <= var);
+      return this.calculateMean(tailLosses);
+    }
+    ```
 
-- [ ] **Testing & Validation**
-  - [ ] File: `tests/` - Comprehensive test suite
-  - [ ] Unit tests for all analytics calculations
-  - [ ] Integration tests with core and ML services
-  - [ ] Backtest accuracy validation
-  - [ ] Performance benchmark tests
+#### **Comprehensive Testing Suite**
+- [ ] **File: `tests/unit/BacktestEngine.test.js`** - Core engine tests
+  - [ ] Portfolio management accuracy tests
+  - [ ] Trade execution simulation validation
+  - [ ] P&L calculation verification
+  - [ ] Position sizing logic tests
 
-- [ ] **Production Features**
-  - [ ] Memory management for large backtests
+- [ ] **File: `tests/unit/PerformanceMetrics.test.js`** - Metrics accuracy
+  - [ ] Sharpe ratio calculation validation
+  - [ ] Drawdown calculation tests
+  - [ ] Win rate and profit factor verification
+  - [ ] Advanced metrics accuracy (Sortino, Calmar, VaR)
+
+- [ ] **File: `tests/integration/ServiceIntegration.test.js`** - Service tests
+  - [ ] Core service integration tests
+  - [ ] ML service integration tests
+  - [ ] Fallback mechanism validation
+  - [ ] Health check functionality
+
+- [ ] **File: `tests/performance/BacktestBenchmarks.test.js`** - Performance tests
+  - [ ] Single pair backtest timing (<30 seconds)
+  - [ ] Batch backtest timing (<3 minutes)
+  - [ ] Memory usage validation (<500MB)
   - [ ] Concurrent backtest handling
-  - [ ] Result caching and storage
-  - [ ] Comprehensive logging and monitoring
 
-## 📊 Key API Endpoints to Implement
-
-```javascript
-// Service health check
-GET /api/health
-Response: {
-  status: "healthy",
-  timestamp: 1704067200000,
-  services: {
-    core: { status: "healthy", error: null },
-    ml: { status: "healthy", error: null }
-  }
-}
-
-// Single pair backtest
-POST /api/backtest/:pair
-Body: {
-  initialBalance: 10000,
-  commissionRate: 0.001,
-  slippageRate: 0.0005,
-  maxPositionSize: 0.15,
-  stopLossPercent: 0.05,
-  takeProfitPercent: 0.10,
-  useMLSignals: true
-}
-Response: {
-  pair: "RVN",
-  results: {
-    initialBalance: 10000,
-    finalBalance: 11250.45,
-    totalReturn: 0.125045,
-    maxDrawdown: 0.089,
-    sharpeRatio: 1.47,
-    totalTrades: 23,
-    winningTrades: 15,
-    winRate: 0.652,
-    trades: [...],
-    equity: [...],
-    timestamps: [...]
-  },
-  config: { initialBalance: 10000, useMLSignals: true },
-  timestamp: 1704067200000
-}
-
-// All pairs backtest
-POST /api/backtest/all
-Body: {
-  initialBalance: 10000,
-  commissionRate: 0.001,
-  useMLSignals: true
-}
-Response: {
-  results: {
-    "RVN": { totalReturnPercent: 12.5, winRatePercent: 65.2, sharpeRatio: 1.47 },
-    "XMR": { totalReturnPercent: 8.3, winRatePercent: 58.7, sharpeRatio: 1.12 }
-  },
-  summary: {
-    averageReturn: 10.4,
-    bestPerformer: "RVN",
-    totalPairs: 6,
-    successfulPairs: 5
-  }
-}
-
-// Available pairs
-GET /api/pairs
-Response: { pairs: ["XMR", "RVN", "BEL", "DOGE", "KAS", "SAL"] }
-```
-
-## 🏗️ Backtesting Engine Architecture
-
-### Core Components:
-
-#### 1. **Portfolio State Management**
-```javascript
-// Portfolio tracking structure
-{
-  currentBalance: 10000,           // Available cash
-  positions: {                    // Open positions
-    "RVN": {
-      type: "long",               // "long" or "short"
-      size: 4273.5,              // Number of units
-      entryPrice: 0.0234,        // Entry price
-      entryTime: 1704067200000,  // Entry timestamp
-      confidence: 0.73           // Signal confidence
+#### **Advanced Risk Analytics**
+- [ ] **File: `src/analytics/RiskAnalytics.js`** - Risk analysis engine
+  - [ ] **Rolling Performance Windows**
+    ```javascript
+    calculateRollingMetrics(equity, windowSize = 30) {
+      const rolling = [];
+      for (let i = windowSize; i < equity.length; i++) {
+        const window = equity.slice(i - windowSize, i);
+        rolling.push({
+          sharpe: this.calculateSharpeRatio(window),
+          drawdown: this.calculateMaxDrawdown(window),
+          volatility: this.calculateVolatility(window)
+        });
+      }
+      return rolling;
     }
-  },
-  equity: [10000, 10047.01],     // Portfolio value history
-  trades: [],                    // Completed trades
-  drawdowns: [0, 0.0047]        // Drawdown history
-}
-```
+    ```
+  
+  - [ ] **Correlation Analysis**: Strategy vs benchmark correlation
+  - [ ] **Risk Attribution**: Technical vs ML signal performance
+  - [ ] **Stress Testing**: Performance under extreme scenarios
 
-#### 2. **Signal Processing**
-```javascript
-// Signal combination logic
-function generateTradingSignal(technicalSignals, mlSignal) {
-  let finalSignal = 'hold';
-  let confidence = 0;
-  
-  // Technical analysis ensemble
-  const techBuyScore = technicalSignals.buy;
-  const techSellScore = technicalSignals.sell;
-  
-  if (techBuyScore > techSellScore && techBuyScore > 2.0) {
-    finalSignal = 'buy';
-    confidence = technicalSignals.confidence;
-  } else if (techSellScore > techBuyScore && techSellScore > 2.0) {
-    finalSignal = 'sell';
-    confidence = technicalSignals.confidence;
-  }
-  
-  // ML signal enhancement
-  if (mlSignal && mlSignal.confidence > 0.7) {
-    if (mlSignal.direction === 'up' && finalSignal !== 'sell') {
-      finalSignal = 'buy';
-      confidence = Math.max(confidence, mlSignal.confidence);
-    } else if (mlSignal.direction === 'down' && finalSignal !== 'buy') {
-      finalSignal = 'sell';
-      confidence = Math.max(confidence, mlSignal.confidence);
+### 🎯 **MEDIUM PRIORITY - Week 3-4**
+
+#### **Monte Carlo Simulation**
+- [ ] **File: `src/advanced/MonteCarloSimulation.js`** - Robustness testing
+  - [ ] **Parameter Uncertainty Modeling**
+    ```javascript
+    async runMonteCarloSimulation(pair, baseConfig, iterations = 1000) {
+      const results = [];
+      for (let i = 0; i < iterations; i++) {
+        const noisyConfig = this.addParameterNoise(baseConfig);
+        const result = await this.runBacktest(pair, noisyConfig);
+        results.push(result);
+      }
+      return this.analyzeMonteCarloResults(results);
     }
+    ```
+  
+  - [ ] **Confidence Intervals**: Return distribution analysis
+  - [ ] **Robustness Metrics**: Parameter sensitivity analysis
+  - [ ] **Risk of Ruin**: Probability of significant losses
+
+#### **Walk-Forward Analysis**
+- [ ] **File: `src/advanced/WalkForwardAnalysis.js`** - Out-of-sample validation
+  - [ ] **Rolling Optimization**: Parameter optimization on training periods
+  - [ ] **Out-of-Sample Testing**: Performance on unseen data
+  - [ ] **Strategy Stability**: Performance degradation detection
+  - [ ] **Overfitting Detection**: Training vs testing performance gaps
+
+#### **Strategy Optimization**
+- [ ] **File: `src/optimization/ParameterOptimizer.js`** - Strategy tuning
+  - [ ] **Grid Search**: Exhaustive parameter combination testing
+  - [ ] **Genetic Algorithm**: Evolutionary parameter optimization
+  - [ ] **Multi-Objective Optimization**: Balance return vs risk
+  - [ ] **Optimization Metrics**: Sharpe ratio, Calmar ratio, profit factor
+
+### 🎯 **LOW PRIORITY - Month 2+**
+
+#### **Advanced Backtesting Features**
+- [ ] **File: `src/advanced/AdvancedBacktest.js`** - Enhanced capabilities
+  - [ ] **Multi-Asset Backtesting**: Portfolio-level strategies
+  - [ ] **Alternative Order Types**: Limit orders, stop orders
+  - [ ] **Market Impact Modeling**: Large position price impact
+  - [ ] **Regime Detection**: Performance across market conditions
+
+#### **Result Storage & Caching**
+- [ ] **File: `src/storage/ResultStorage.js`** - Persistence layer
+  - [ ] Database integration for backtest results
+  - [ ] Caching for frequently run backtests
+  - [ ] Historical backtest comparison
+  - [ ] Result export capabilities (CSV, JSON)
+
+#### **Advanced Reporting**
+- [ ] **File: `src/reporting/ReportGenerator.js`** - Comprehensive reports
+  - [ ] PDF report generation
+  - [ ] Detailed trade analysis reports
+  - [ ] Risk decomposition analysis
+  - [ ] Strategy comparison reports
+
+## 🛠️ Implementation Instructions
+
+### **Step 1: Enhanced Performance Metrics (Days 1-3)**
+
+**Create file: `src/analytics/AdvancedMetrics.js`**
+```javascript
+const _ = require('lodash');
+
+class AdvancedMetrics {
+  calculateSortinoRatio(returns, targetReturn = 0, riskFreeRate = 0) {
+    const excessReturns = returns.map(r => r - riskFreeRate);
+    const avgExcessReturn = _.mean(excessReturns);
+    
+    const downsideReturns = excessReturns.filter(r => r < targetReturn);
+    if (downsideReturns.length === 0) return Infinity;
+    
+    const downsideDeviation = Math.sqrt(
+      _.mean(downsideReturns.map(r => Math.pow(r - targetReturn, 2)))
+    );
+    
+    return downsideDeviation > 0 ? avgExcessReturn / downsideDeviation : 0;
   }
   
-  return { action: finalSignal, confidence };
-}
-```
-
-#### 3. **Risk Management**
-```javascript
-// Position sizing with risk management
-function calculatePositionSize(balance, confidence, maxPositionSize) {
-  const baseSize = balance * maxPositionSize;
-  const confidenceMultiplier = Math.min(confidence * 2, 1);
-  return baseSize * confidenceMultiplier;
-}
-
-// Stop-loss and take-profit logic
-function checkExitConditions(position, currentPrice, stopLoss, takeProfit) {
-  const currentPnl = position.type === 'long' 
-    ? (currentPrice - position.entryPrice) / position.entryPrice
-    : (position.entryPrice - currentPrice) / position.entryPrice;
-  
-  if (currentPnl <= -stopLoss) {
-    return { action: 'close', reason: 'stop_loss' };
+  calculateCalmarRatio(annualReturn, maxDrawdown) {
+    return maxDrawdown > 0 ? annualReturn / maxDrawdown : 0;
   }
   
-  if (currentPnl >= takeProfit) {
-    return { action: 'close', reason: 'take_profit' };
+  calculateVaR(returns, confidence = 0.95) {
+    const sorted = [...returns].sort((a, b) => a - b);
+    const index = Math.floor((1 - confidence) * sorted.length);
+    return sorted[index] || 0;
   }
   
-  return { action: 'hold' };
-}
-```
-
-## 📈 Performance Metrics Implementation
-
-### Core Metrics to Calculate:
-
-#### 1. **Return Metrics**
-```javascript
-{
-  totalReturn: 0.125,              // 12.5% total return
-  totalReturnPercent: 12.5,
-  annualizedReturn: 0.287,         // Annualized return
-  sharpeRatio: 1.47,               // Risk-adjusted performance
-  sortinoRatio: 2.13,              // Downside deviation adjusted
-  calmarRatio: 1.41                // Max drawdown adjusted
-}
-```
-
-#### 2. **Risk Metrics**
-```javascript
-{
-  maxDrawdown: 0.089,              // Maximum drawdown (8.9%)
-  maxDrawdownPercent: 8.9,
-  averageDrawdown: 0.034,          // Average drawdown
-  volatility: 0.156,               // Portfolio volatility
-  var_95: -0.045,                  // 95% Value at Risk
-  expectedShortfall_95: -0.067     // 95% Expected Shortfall
-}
-```
-
-#### 3. **Trade Analysis**
-```javascript
-{
-  totalTrades: 23,
-  winningTrades: 15,
-  losingTrades: 8,
-  winRate: 0.652,                  // 65.2% win rate
-  winRatePercent: 65.2,
-  avgWin: 125.30,                  // Average winning trade
-  avgLoss: -87.45,                 // Average losing trade
-  profitFactor: 1.43,              // Gross profit / Gross loss
-  largestWin: 245.67,              // Largest winning trade
-  largestLoss: -156.23,            // Largest losing trade
-  averageTradeLength: 4.2,         // Average hours per trade
-  expectancy: 0.087                // Expected value per trade
-}
-```
-
-## ⚙️ Configuration Requirements
-
-### Environment Variables (.env)
-```bash
-# Backtesting Service Configuration
-PORT=3002
-NODE_ENV=development
-
-# Service URLs
-CORE_SERVICE_URL=http://localhost:3000
-ML_SERVICE_URL=http://localhost:3001
-
-# Backtesting Defaults
-DEFAULT_INITIAL_BALANCE=10000
-DEFAULT_COMMISSION_RATE=0.001
-DEFAULT_SLIPPAGE_RATE=0.0005
-DEFAULT_MAX_POSITION_SIZE=0.15
-DEFAULT_STOP_LOSS_PERCENT=0.05
-DEFAULT_TAKE_PROFIT_PERCENT=0.10
-
-# Performance Settings
-MAX_CONCURRENT_BACKTESTS=3
-BACKTEST_TIMEOUT_MS=300000
-```
-
-### Backtest Configuration Options
-```javascript
-{
-  // Portfolio settings
-  initialBalance: 10000,           // Starting capital
-  maxPositionSize: 0.15,          // Maximum 15% per position
+  calculateExpectedShortfall(returns, confidence = 0.95) {
+    const var = this.calculateVaR(returns, confidence);
+    const tailLosses = returns.filter(r => r <= var);
+    return tailLosses.length > 0 ? _.mean(tailLosses) : 0;
+  }
   
-  // Trading costs
-  commissionRate: 0.001,          // 0.1% commission per trade
-  slippageRate: 0.0005,           // 0.05% slippage
+  calculateInformationRatio(portfolioReturns, benchmarkReturns) {
+    const excessReturns = portfolioReturns.map(
+      (pr, i) => pr - (benchmarkReturns[i] || 0)
+    );
+    const avgExcessReturn = _.mean(excessReturns);
+    const trackingError = this.calculateStandardDeviation(excessReturns);
+    
+    return trackingError > 0 ? avgExcessReturn / trackingError : 0;
+  }
   
-  // Risk management
-  stopLossPercent: 0.05,          // 5% stop loss
-  takeProfitPercent: 0.10,        // 10% take profit
+  calculateStandardDeviation(values) {
+    const mean = _.mean(values);
+    const squaredDiffs = values.map(value => Math.pow(value - mean, 2));
+    const avgSquaredDiff = _.mean(squaredDiffs);
+    return Math.sqrt(avgSquaredDiff);
+  }
+}
+
+module.exports = AdvancedMetrics;
+```
+
+**Update file: `src/backtesting/BacktestEngine.js`**
+Add import and integrate advanced metrics:
+```javascript
+const AdvancedMetrics = require('../analytics/AdvancedMetrics');
+
+// In constructor
+this.advancedMetrics = new AdvancedMetrics();
+
+// In calculateResults method, add these metrics:
+const returns = [];
+for (let i = 1; i < this.equity.length; i++) {
+  returns.push((this.equity[i] - this.equity[i-1]) / this.equity[i-1]);
+}
+
+// Add to results object:
+sortinoRatio: this.advancedMetrics.calculateSortinoRatio(returns),
+calmarRatio: this.advancedMetrics.calculateCalmarRatio(
+  results.totalReturn * (252 / this.equity.length), // Annualized
+  results.maxDrawdown
+),
+var_95: this.advancedMetrics.calculateVaR(returns, 0.95),
+var_99: this.advancedMetrics.calculateVaR(returns, 0.99),
+expectedShortfall_95: this.advancedMetrics.calculateExpectedShortfall(returns, 0.95),
+informationRatio: this.advancedMetrics.calculateInformationRatio(returns, [])
+```
+
+### **Step 2: Comprehensive Testing Suite (Days 4-7)**
+
+**Create file: `tests/unit/BacktestEngine.test.js`**
+```javascript
+const BacktestEngine = require('../../src/backtesting/BacktestEngine');
+
+describe('BacktestEngine', () => {
+  let engine;
   
-  // Signal configuration
-  useMLSignals: true,             // Include ML predictions
-  mlConfidenceThreshold: 0.6,     // Minimum ML confidence
-  technicalConfidenceThreshold: 0.6, // Minimum technical confidence
+  beforeEach(() => {
+    engine = new BacktestEngine({
+      initialBalance: 10000,
+      commissionRate: 0.001,
+      slippageRate: 0.0005
+    });
+  });
   
-  // Strategy weights
-  strategyWeights: {
-    rsi: 1.0,
-    macd: 1.2,
-    bollinger: 1.0,
-    ml: 1.5
+  describe('Portfolio Management', () => {
+    test('should initialize with correct balance', () => {
+      expect(engine.currentBalance).toBe(10000);
+      expect(engine.positions).toEqual({});
+    });
+    
+    test('should calculate position size correctly', () => {
+      const size = engine.calculatePositionSize(0.8);
+      expect(size).toBe(10000 * 0.1 * 1.6); // maxPosition * confidence * 2
+    });
+    
+    test('should apply slippage correctly', () => {
+      const buyPrice = engine.applySlippage(100, 'buy');
+      const sellPrice = engine.applySlippage(100, 'sell');
+      
+      expect(buyPrice).toBe(100 * 1.0005);
+      expect(sellPrice).toBe(100 * 0.9995);
+    });
+  });
+  
+  describe('Trade Execution', () => {
+    test('should open position correctly', async () => {
+      await engine.openPosition('TEST', 'long', 100, Date.now(), 0.8);
+      
+      expect(engine.positions['TEST']).toBeDefined();
+      expect(engine.positions['TEST'].type).toBe('long');
+      expect(engine.currentBalance).toBeLessThan(10000);
+    });
+    
+    test('should close position correctly', async () => {
+      await engine.openPosition('TEST', 'long', 100, Date.now(), 0.8);
+      const initialTrades = engine.trades.length;
+      
+      await engine.closePosition('TEST', 110, Date.now(), 'take_profit');
+      
+      expect(engine.positions['TEST']).toBeUndefined();
+      expect(engine.trades.length).toBe(initialTrades + 1);
+      expect(engine.trades[0].pnl).toBeGreaterThan(0);
+    });
+  });
+});
+```
+
+**Create file: `tests/unit/AdvancedMetrics.test.js`**
+```javascript
+const AdvancedMetrics = require('../../src/analytics/AdvancedMetrics');
+
+describe('AdvancedMetrics', () => {
+  let metrics;
+  
+  beforeEach(() => {
+    metrics = new AdvancedMetrics();
+  });
+  
+  describe('Sortino Ratio', () => {
+    test('should calculate Sortino ratio correctly', () => {
+      const returns = [0.1, -0.05, 0.08, -0.02, 0.12, -0.08, 0.15];
+      const sortino = metrics.calculateSortinoRatio(returns);
+      
+      expect(sortino).toBeGreaterThan(0);
+      expect(typeof sortino).toBe('number');
+    });
+    
+    test('should handle all positive returns', () => {
+      const returns = [0.1, 0.05, 0.08, 0.02, 0.12];
+      const sortino = metrics.calculateSortinoRatio(returns);
+      
+      expect(sortino).toBe(Infinity);
+    });
+  });
+  
+  describe('Value at Risk', () => {
+    test('should calculate VaR correctly', () => {
+      const returns = [-0.1, -0.05, 0.02, 0.08, 0.12, -0.03, 0.15, -0.08, 0.05, 0.10];
+      const var95 = metrics.calculateVaR(returns, 0.95);
+      
+      expect(var95).toBeLessThan(0);
+      expect(typeof var95).toBe('number');
+    });
+  });
+  
+  describe('Expected Shortfall', () => {
+    test('should calculate Expected Shortfall correctly', () => {
+      const returns = [-0.1, -0.05, 0.02, 0.08, 0.12, -0.03, 0.15, -0.08, 0.05, 0.10];
+      const es = metrics.calculateExpectedShortfall(returns, 0.95);
+      
+      expect(es).toBeLessThan(0);
+      expect(typeof es).toBe('number');
+    });
+  });
+});
+```
+
+**Update file: `package.json`** - Add test scripts:
+```json
+{
+  "scripts": {
+    "test": "jest",
+    "test:unit": "jest tests/unit",
+    "test:integration": "jest tests/integration",
+    "test:performance": "jest tests/performance",
+    "test:watch": "jest --watch"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }
 ```
 
-## 🧪 Testing & Validation
+### **Step 3: Monte Carlo Simulation (Week 2)**
 
-```bash
-# Test commands to implement
-npm run test:connectivity    # Service integration tests
-npm run test:backtest       # Backtesting engine tests
-npm run test:analytics      # Performance metrics tests
-npm run test:all            # Comprehensive test suite
+**Create file: `src/advanced/MonteCarloSimulation.js`**
+```javascript
+const BacktestEngine = require('../backtesting/BacktestEngine');
+const { Logger } = require('../utils');
 
-# Health verification
-curl http://localhost:3002/api/health
-curl http://localhost:3002/api/pairs
+class MonteCarloSimulation {
+  constructor() {
+    this.iterations = 1000;
+  }
+  
+  async runSimulation(pair, historicalData, strategies, baseConfig, iterations = 1000) {
+    const results = [];
+    Logger.info(`Starting Monte Carlo simulation for ${pair}`, { iterations });
+    
+    for (let i = 0; i < iterations; i++) {
+      try {
+        const noisyConfig = this.addParameterNoise(baseConfig);
+        const engine = new BacktestEngine(noisyConfig);
+        
+        const result = await engine.runBacktest(pair, historicalData, strategies);
+        results.push(result);
+        
+        if (i % 100 === 0) {
+          Logger.info(`Monte Carlo progress: ${i}/${iterations} completed`);
+        }
+      } catch (error) {
+        Logger.warn(`Monte Carlo iteration ${i} failed:`, error.message);
+      }
+    }
+    
+    return this.analyzeResults(results);
+  }
+  
+  addParameterNoise(baseConfig) {
+    return {
+      ...baseConfig,
+      commissionRate: this.addNoise(baseConfig.commissionRate, 0.2),
+      slippageRate: this.addNoise(baseConfig.slippageRate, 0.3),
+      stopLossPercent: this.addNoise(baseConfig.stopLossPercent, 0.1),
+      takeProfitPercent: this.addNoise(baseConfig.takeProfitPercent, 0.1)
+    };
+  }
+  
+  addNoise(value, variability) {
+    const noise = 1 + (Math.random() - 0.5) * 2 * variability;
+    return Math.max(value * noise, 0);
+  }
+  
+  analyzeResults(results) {
+    const returns = results.map(r => r.totalReturnPercent);
+    const sharpeRatios = results.map(r => r.sharpeRatio);
+    const drawdowns = results.map(r => r.maxDrawdownPercent);
+    
+    return {
+      iterations: results.length,
+      returns: {
+        mean: this.calculateMean(returns),
+        median: this.calculateMedian(returns),
+        std: this.calculateStandardDeviation(returns),
+        min: Math.min(...returns),
+        max: Math.max(...returns),
+        percentile_5: this.calculatePercentile(returns, 5),
+        percentile_95: this.calculatePercentile(returns, 95)
+      },
+      sharpeRatios: {
+        mean: this.calculateMean(sharpeRatios),
+        std: this.calculateStandardDeviation(sharpeRatios)
+      },
+      drawdowns: {
+        mean: this.calculateMean(drawdowns),
+        worst: Math.max(...drawdowns)
+      },
+      probabilityOfProfit: returns.filter(r => r > 0).length / returns.length,
+      riskOfRuin: returns.filter(r => r < -50).length / returns.length
+    };
+  }
+  
+  calculateMean(values) {
+    return values.reduce((sum, val) => sum + val, 0) / values.length;
+  }
+  
+  calculateMedian(values) {
+    const sorted = [...values].sort((a, b) => a - b);
+    const mid = Math.floor(sorted.length / 2);
+    return sorted.length % 2 === 0 
+      ? (sorted[mid - 1] + sorted[mid]) / 2 
+      : sorted[mid];
+  }
+  
+  calculateStandardDeviation(values) {
+    const mean = this.calculateMean(values);
+    const squaredDiffs = values.map(val => Math.pow(val - mean, 2));
+    return Math.sqrt(this.calculateMean(squaredDiffs));
+  }
+  
+  calculatePercentile(values, percentile) {
+    const sorted = [...values].sort((a, b) => a - b);
+    const index = Math.ceil((percentile / 100) * sorted.length) - 1;
+    return sorted[Math.max(0, index)];
+  }
+}
 
-# Test backtest execution
-curl -X POST http://localhost:3002/api/backtest/RVN \
-  -H "Content-Type: application/json" \
-  -d '{"initialBalance": 10000, "useMLSignals": true}'
+module.exports = MonteCarloSimulation;
 ```
 
-## 📊 Performance Benchmarks
+**Update file: `src/api/BacktestServer.js`** - Add Monte Carlo endpoint:
+```javascript
+const MonteCarloSimulation = require('../advanced/MonteCarloSimulation');
 
-- **Single Pair Backtest**: <30 seconds
-- **All Pairs Backtest**: <3 minutes  
-- **Memory Usage**: <500MB during execution
-- **API Response Time**: <5 seconds for single pair
-- **Concurrent Backtests**: Up to 3 simultaneously
+// In constructor
+this.monteCarloSim = new MonteCarloSimulation();
 
-## 🔗 Integration Points
-
-**Consumes from:**
-- trading-bot-core (Port 3000) - Technical analysis and market data
-- trading-bot-ml (Port 3001) - ML predictions for enhanced strategies
-
-**Provides to:**
-- trading-bot-risk (Port 3003) - Strategy validation for risk assessment
-- trading-bot-execution (Port 3004) - Strategy validation before live trading
-- trading-bot-dashboard (Port 3005) - Backtest results for visualization
-
-## ✅ Success Criteria
-
-**Phase 3A Complete When:**
-- Service successfully connects to both core and ML services
-- Health checks show all dependencies operational
-
-**Phase 3B Complete When:**
-- Backtesting engine accurately simulates trades
-- Portfolio tracking correctly calculates P&L and equity curves
-- Signal integration combines technical and ML signals effectively
-
-**Phase 3C Complete When:**
-- All performance metrics calculate correctly
-- Risk-adjusted returns match financial standards
-- Advanced analytics provide meaningful insights
-
-**Phase 3D Complete When:**
-- All API endpoints return properly formatted results
-- Single and batch backtests complete successfully
-- Error handling manages timeouts and failures gracefully
-
-**Phase 3E Complete When:**
-- Test suite validates all calculations
-- Performance benchmarks achieved
-- Advanced features (Monte Carlo, walk-forward) operational
-
-## 🚨 Common Issues & Solutions
-
-### 1. **Insufficient Historical Data**
-```bash
-# Check data availability in core service
-curl http://localhost:3000/api/pair/RVN | jq '.history.closes | length'
-# Should have 100+ data points for meaningful backtest
+// Add new route
+this.app.post('/api/backtest/:pair/montecarlo', async (req, res) => {
+  try {
+    const { pair } = req.params;
+    const config = req.body || {};
+    const iterations = req.body.iterations || 1000;
+    
+    Logger.info(`Starting Monte Carlo simulation for ${pair}`, { iterations });
+    
+    const historicalData = await this.serviceClient.getHistoricalData(pair);
+    const mlPredictions = await this.serviceClient.getMLPredictions(pair);
+    
+    const results = await this.monteCarloSim.runSimulation(
+      pair,
+      historicalData,
+      historicalData.strategies,
+      config,
+      iterations
+    );
+    
+    res.json({
+      pair,
+      montecarlo: results,
+      config,
+      timestamp: Date.now()
+    });
+    
+  } catch (error) {
+    Logger.error(`Monte Carlo simulation failed for ${req.params.pair}`, {
+      error: error.message
+    });
+    
+    res.status(500).json({
+      error: error.message,
+      pair: req.params.pair,
+      timestamp: Date.now()
+    });
+  }
+});
 ```
 
-### 2. **Service Connectivity**
+## 🧪 Testing Commands
+
 ```bash
-# Test core service connection
-curl http://localhost:3000/api/health
+# Install test dependencies
+npm install --save-dev jest
 
-# Test ML service connection  
-curl http://localhost:3001/api/health
+# Run all tests
+npm test
 
-# Check backtest service logs for integration errors
-tail -f logs/backtest-error.log | grep -E "(core|ml)"
+# Run specific test suites
+npm run test:unit
+npm run test:integration
+npm run test:performance
+
+# Watch mode for development
+npm run test:watch
+
+# Test coverage
+npm run test -- --coverage
+
+# Test individual components
+npm test -- BacktestEngine.test.js
+npm test -- AdvancedMetrics.test.js
 ```
 
-### 3. **Performance Issues**
-- Monitor memory usage during large backtests
-- Implement data trimming for memory management
-- Use concurrent processing for batch backtests
-- Add progress tracking for long-running operations
+## 📊 API Enhancement Examples
+
+### **Enhanced Backtest Response with Advanced Metrics**
+```javascript
+// POST /api/backtest/RVN response now includes:
+{
+  "results": {
+    // Existing metrics
+    "totalReturnPercent": 12.5,
+    "sharpeRatio": 1.47,
+    "maxDrawdownPercent": 8.9,
+    
+    // NEW: Advanced metrics
+    "sortinoRatio": 2.13,
+    "calmarRatio": 1.41,
+    "var_95": -0.045,
+    "var_99": -0.089,
+    "expectedShortfall_95": -0.067,
+    "informationRatio": 0.87
+  }
+}
+```
+
+### **New Monte Carlo Endpoint**
+```javascript
+// POST /api/backtest/RVN/montecarlo
+{
+  "initialBalance": 10000,
+  "iterations": 1000,
+  "commissionRate": 0.001
+}
+
+// Response:
+{
+  "montecarlo": {
+    "iterations": 1000,
+    "returns": {
+      "mean": 10.4,
+      "median": 9.8,
+      "std": 15.2,
+      "percentile_5": -12.3,
+      "percentile_95": 34.7
+    },
+    "probabilityOfProfit": 0.73,
+    "riskOfRuin": 0.05
+  }
+}
+```
+
+## 🎯 Success Criteria
+
+### **Week 1 Complete When:**
+- ✅ Advanced metrics (Sortino, Calmar, VaR) integrated
+- ✅ Unit tests covering all calculations pass
+- ✅ API responses include enhanced metrics
+
+### **Week 2 Complete When:**
+- ✅ Monte Carlo simulation endpoint functional
+- ✅ Robustness testing validates strategy stability
+- ✅ Performance tests confirm system handles load
+
+### **Month 1 Complete When:**
+- ✅ Walk-forward analysis implemented
+- ✅ Parameter optimization capabilities added
+- ✅ Comprehensive test coverage >90%
+
+## 🏆 Current Service Strengths
+
+**Production-Ready Features:**
+- ✅ **Robust Backtesting Engine**: Handles realistic trading simulation
+- ✅ **Complete API**: All essential endpoints implemented
+- ✅ **Service Integration**: Clean integration with core + ML services
+- ✅ **Professional Code Quality**: Well-structured, documented, logged
+- ✅ **Error Handling**: Graceful fallbacks and error responses
+- ✅ **Performance**: Handles single/batch backtests efficiently
+
+**Ready for Advanced Enhancement**: The foundation is solid - we're now building sophisticated analytics on top of a proven core system.
 
 ---
 
-*Save this file as `DEVELOPMENT_GUIDE.md` in the trading-bot-backtest repository root*
+*This service is **production-ready** for basic backtesting. Focus is now on adding advanced analytical capabilities for institutional-grade strategy validation.*
